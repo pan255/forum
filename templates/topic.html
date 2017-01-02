@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    topic
+{% endblock %}
+
+{% block css %}
+    {{ super() }}
+    <link rel="stylesheet" href="/static/css/topic.css">
+{% endblock %}
+
+{% block content %}
+    <div class="bbs-content">
+        <div class="bbs-content-top">
+            <div class="bbs-content-top-left">
+                <div class="bbs-content-top-nodes">
+                <a href=" {{ url_for('home.home') }}">All</a>
+                         ›
+                <a href="{{ url_for('node.show', id=topic.node.id) }}">{{ topic.node.name }}</a>
+                         ›
+                <a href="{{ url_for('topic.show', id=topic.id) }}">{{ topic.title }}</a>
+                </div>
+                <div class="bbs-content-top-title">
+                    <h2>{{ topic.title }}</h2>
+                </div>
+                <div class="bbs-content-top-author">
+                    <a href="#">{{ topic.user.username }}</a>
+                    <span> • 发布于{{ topic.created_time }}</span>
+                </div>
+            </div>
+
+            <div class="bbs-content-top-avatar">
+                <a href="#"><img src="{{ topic.user.avatar }}"></a>
+            </div>
+
+            <div class="bbs-content-top-content">
+                <p>{{ topic.content }}</p>
+            </div>
+        </div>
+
+
+        <div class="bbs-content-middle">
+            {% if topic.last_comment %}
+            <div class="bbs-content-middle-top">
+                {{ topic.comments_num }} 回复 | 直到 {{ topic.last_comment.created_time }}
+            </div>
+            {% else %}
+            <div class="bbs-content-middle-top">
+                0 回复
+            </div>
+            {% endif %}
+
+            {% for comment in topic.comments %}
+            <div class="bbs-content-middle-cell">
+                <div class="bbs-content-middle-cell-avatar">
+                    <a><img src="{{ comment.user.avatar }}"</a>
+                </div>
+                <div class="bbs-content-middle-cell-comments">
+                    <div class="bbs-content-middle-cell-username">
+                        <a href="#">{{ comment.user.username }}</a>
+                        <span>{{ comment.created_time }}</span>
+                    </div>
+                    <div class="bbs-content-middle-cell-content">
+                        {{ comment.content }}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="bbs-content-bottom">
+            <div class="bbs-content-bottom-new">
+                <span>添加一条新的回复</span>
+            </div>
+            <div class="bbs-content-bottom-add">
+                <form action="{{ url_for('comment.add') }}" method="post">
+                    <input type="hidden" name="user_id" value="{{ u.id }}">
+                    <input type="hidden" name="topic_id" value="{{ topic.id }}">
+                    <textarea name="content"  style="resize:none"></textarea>
+                    <button>回复</button>
+                    <span>请尽量让自己的回复能够对别人有帮助回复</span>
+                </form>
+            </div>
+            <div class="bbs-content-bottom-index">
+                <a href="{{ url_for('home.home') }}">←V2EX</a>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+{% endblock %}
+
+
+</body>
+</html>

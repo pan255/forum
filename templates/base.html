@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    {% block css %}
+    <link rel="stylesheet" href="/static/css/base.css">
+    {% endblock %}
+</head>
+<body>
+
+    <div class="bbs-top">
+        <div class="bbs-logo">
+            <a href="{{ url_for('home.home') }}">
+                <img src="/static/img/adv.jpg">
+            </a>
+        </div>
+        {% if u %}
+        <div class="bbs-menu">
+            <a href="{{ url_for('home.home') }}">首页</a>
+            <a href="{{ url_for('user.profile', id=u.id) }}">{{ u.username }}</a>
+            <a href="{{ url_for('timeline.index') }}">时间轴</a>
+            <a href="{{ url_for('user.setting') }}">设置</a>
+            <a href="{{ url_for('user.signout') }}">退出登录</a>
+        </div>
+        {% else %}
+        <div class="bbs-menu">
+            <a href="{{ url_for('home.home') }}">首页</a>
+            <a href="{{ url_for('user.login') }}">登录</a>
+            <a href="{{ url_for('user.register') }}">注册</a>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="bbs-main">
+        {% block content %}
+        {% endblock %}
+
+        <div class="bbs-sidebar">
+            <div class="bbs-sidebar-user">
+                {% if u %}
+                <div class="bbs-sidebar-user-username">
+                    <img src="{{ u.avatar }}">
+                    <a href="{{ url_for('user.profile', id=u.id) }}">{{ u.username }}</a>
+                </div>
+                <div class="bbs-sidebar-user-topics">
+                        <a href="#"><span>0</span><br>节点收藏</a>
+                        <a class="bbs-sidebar-user-topics-middle" href="#"><span>0</span><br>主题收藏</a>
+                        <a href="#"><span>0</span><br>特别关注</a>
+                </div>
+                <div class="bbs-sidebar-user-new">
+                    <a href="#">创作新的主题</a>
+                </div>
+                <div class="bbs-sidebar-user-message">
+                    <a href="#">0条未读消息</a>
+                </div>
+                <div class="bbs-sidebar-user-gold">
+                    <a href="#">›  在你开始发帖之前，请先领取初始资本</a>
+                </div>
+                {% else %}
+                <div class="bbs-sidebar-text">
+                    <span class="text-span-a">
+                        V2EX = way to explore
+                    </span>
+                    <br>
+                    <span class="text-span-b">
+                        V2EX 是一个关于分享和探索的地方
+                    </span>
+                </div>
+                <div class="bbs-sidebar-register">
+                    <form action="{{ url_for('user.register') }}">
+                        <button>现在注册</button>
+                    </form>
+                </div>
+                <div class="bbs-sidebar-login">
+                    <span>已注册用户请</span>
+                    <a href="{{ url_for('user.login') }}">登录</a>
+                </div>
+                {% endif %}
+            </div>
+            <div class="bbs-sidebar-ad">
+                <div class="bbs-sidebar-ad-img">
+                    <a href="#"><img src="/static/img/adv.jpg"></a>
+                </div>
+                <div class="bbs-sidebar-ad-text">
+                    <a href="#">广告</a>
+                </div>
+            </div>
+
+        {% block topic %}
+        {% endblock %}
+        </div>
+    </div>
+
+    <div class="bbs-footer">
+        <div class="bbs-footer-top">
+            <a href="#">FAQ</a>
+            <a href="#">API</a>
+            <a href="#">我们的愿景</a>
+            <a href="#">IP查询</a>
+            <a href="#">广告投放</a>
+            <a href="#">鸣谢</a>
+            <a href="#">上网首页</a>
+            <a href="#">1818人在线</a>
+        </div>
+        <div class="bbs-footer-middle">
+            <div>
+                创意工作者的社区
+            </div>
+            <div>
+                World is powered by solitude
+            </div>
+        </div>
+        <div class="bbs-footer-bottom">
+            <img src="/static/img/dongtu.gif">
+        </div>
+    </div>
+
+</body>
+</html>

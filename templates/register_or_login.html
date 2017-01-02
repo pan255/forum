@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block css %}
+    {{ super() }}
+    <link rel="stylesheet" href="/static/css/login_regster.css">
+{% endblock %}
+
+{% block content %}
+    <div class="bbs-content">
+        <img src="/static/img/login.jpeg">
+        <span>请</span>
+        <a href="{{ url_for('user.login') }}">登录</a>
+        <span>或者</span>
+        <a href="{{ url_for('user.register') }}">注册</a>
+    </div>
+{% endblock %}
+
+
+
+

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block css %}
+    {{ super() }}
+    <link rel="stylesheet" href="/static/css/topic_new.css">
+{% endblock %}
+
+{% block content %}
+    <div class="bbs-content">
+        <div class="user-nodes">
+            <a href="{{ url_for('home.home') }}">V2EX</a>
+            ›
+            <span>创作新主题</span>
+        </div>
+        <div class="bbs-form">
+            <form action="{{ url_for('topic.add') }}" method="post">
+                <input type="hidden" name="user_id" value="{{ u.id }}">
+                <input type="hidden" name="node_id" value="{{ node_id }}">
+                <div>主题标题</div>
+                <input type="text" name="title" placeholder="请输入主题标题，如果标题能够表达完整内容，则正文可以为空">
+                <div>正文</div>
+                <textarea name="content" style="resize:none"></textarea>
+                <br>
+                <button>发布主题</button>
+            </form>
+        </div>
+
+    </div>
+{% endblock %}

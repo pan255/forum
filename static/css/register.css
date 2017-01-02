@@ -1,0 +1,44 @@
+.bbs-content {
+    background: white;
+    width: 770px;
+    float: left;
+    border: solid 1px lightgray;
+    border-radius: 5px;
+    box-shadow: 0px 3px 2px #cccccc;
+}
+.user-nodes {
+    padding: 10px;
+    border-bottom: solid 1px lightgray;
+}
+.user-nodes a {
+    text-decoration: none;
+    color: #778087;
+    font-size: 14px;
+}
+.user-nodes span {
+    font-size: 14px;
+}
+.user-nodes a:hover{
+    color: #4d5256;
+    text-decoration: underline;
+}
+.user-register {
+    padding: 10px;
+}
+.user-register input {
+    margin-bottom: 10px;
+    margin-left: 160px;
+    width: 300px;
+    height: 18px;
+}
+.user-register button {
+    font-weight: bold;
+    margin-left: 160px;
+}
+.user-register span {
+    float: right;
+    position: relative;
+    right: 600px;
+    top: 5px;
+    font-size: 14px;
+}

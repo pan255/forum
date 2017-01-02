@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}timeline{% endblock %}
+
+{% block css %}
+    {{ super() }}
+    <link rel="stylesheet" href="/static/css/timeline.css">
+{% endblock %}
+
+{% block content %}
+    <div class="bbs-content">
+        <div class="timeline-add">
+            <span>
+                你在想什么？
+            </span>
+            <form action="{{ url_for('timeline.add') }}" method="post">
+                <input type="hidden" name="user_id" value="{{ u.id }}">
+                <textarea name="content"  style="resize:none"></textarea>
+                <div class="timeline-add-public">
+                    <button>发布</button>
+                </div>
+
+            </form>
+        </div>
+
+        <div class="timelines">
+            {% for timeline in timeline_list %}
+            <div class="timeline-cell">
+                <div class="timeline-avatar">
+                    <a><img src="{{ u.avatar }}"></a>
+                </div>
+                <div class="timeline-username-content">
+                    <a href="{{ url_for('user.profile', id=u.id) }}">{{ u.username }}</a>
+                    <time>{{ timeline.created_time }}</time>
+                    <br>
+                    <span>{{ timeline.content }}</span>
+                </div>
+                <div class="timeline-operation">
+                    <a href="{{ url_for('timeline.delete', id=timeline.id) }}">删除</a>
+                    <a href="{{ url_for('timeline.edit', id=timeline.id) }}">编辑</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,84 @@
+.bbs-content {
+    width: 770px;
+    float: left;
+}
+.timeline-add {
+    background: white;
+    border: solid 1px lightgray;
+    border-radius: 5px;
+}
+.timeline-add span {
+    display: block;
+    padding: 10px;
+    border-bottom: solid 1px lightgray;
+    color: #ccc;
+    font-size: 14px;
+}
+.timeline-add form {
+    display: block;
+}
+.timeline-add textarea {
+    display: 10px;
+    margin: 10px;
+    width: 740px;
+    height: 200px;
+    border: 0px;
+}
+.timeline-add-public {
+    padding-top: 10px;
+    border: solid 1px lightgray;
+}
+.timeline-add-public button {
+    margin-left: 10px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+.timelines {
+    margin-top: 20px;
+    background: white;
+    border: solid 1px lightgray;
+    border-radius: 5px;
+}
+.timeline-cell {
+   border-bottom: solid 1px lightgray;
+}
+.timeline-avatar {
+    display: inline-block;
+    padding: 10px;
+}
+.timeline-avatar img {
+    max-height: 50px;
+    border: solid 1px lightgray;
+    border-radius: 5px;
+}
+.timeline-username-content {
+    position: relative;
+    bottom: 5px;
+    display: inline-block;
+}
+.timeline-username-content a{
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    display: inline-block;
+    padding-bottom: 10px;
+    font-weight: bold;
+}
+.timeline-username-content time {
+    color: #ccc;
+    font-size: 12px;
+}
+.timeline-operation {
+    float: right;
+    padding-right: 10px;
+    position: relative;
+    top: 50px;
+}
+.timeline-operation a{
+    color: #ccc;
+    text-decoration: none;
+    font-size: 14px;
+}
+.timeline-operation a:hover{
+    text-decoration: underline;
+}

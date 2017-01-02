@@ -1,0 +1,149 @@
+.bbs-content {
+    width: 770px;
+    float: left;
+}
+.bbs-content-top{
+    background: white;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    box-shadow: 0px 3px 2px #cccccc;
+}
+.bbs-content-top-left {
+    display: inline-block;
+    padding-left: 10px;
+}
+.bbs-content-top-nodes {
+    padding-top: 10px;
+}
+.bbs-content-top-nodes a{
+    text-decoration: none;
+    font-size: 14px;
+    color: #778087;
+}
+.bbs-content-top-title {
+}
+.bbs-content-top-author {
+    padding-bottom: 10px;
+}
+.bbs-content-top-author a{
+    text-decoration: none;
+    color: #778087;
+    font-weight: bold;
+}
+.bbs-content-top-author a:hover {
+    color: #4d5256;
+    text-decoration: underline;
+}
+.bbs-content-top-author span{
+    color: #778087;
+    font-size: 14px;
+}
+.bbs-content-top-avatar {
+    float: right;
+    padding-right: 10px;
+}
+.bbs-content-top-avatar img{
+    max-height: 80px;
+    margin: 10px 0px 10px 10px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+}
+.bbs-content-top-content {
+    padding: 20px 10px;
+    border-top: solid 1px lightgray;
+}
+.bbs-content-top-content span{
+    font-size: 14px;
+    line-height: 1.6;
+}
+.bbs-content-middle {
+    background: white;
+    margin-top: 20px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    box-shadow: 0px 3px 2px #cccccc;
+}
+.bbs-content-middle-top {
+    padding: 10px;
+    font-size: 14px;
+    color: #999;
+}
+.bbs-content-middle-cell {
+    border-top: solid 1px lightgray;
+    padding: 10px;
+}
+.bbs-content-middle-cell-avatar {
+    display: inline-block;
+
+}
+.bbs-content-middle-cell-comments {
+    display: inline-block;
+}
+.bbs-content-middle-cell-avatar img{
+    max-height: 50px;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+}
+.bbs-content-middle-cell-username {
+    padding-bottom: 18px;
+}
+.bbs-content-middle-cell-username a{
+    color: gray;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+}
+.bbs-content-middle-cell-username span {
+    color: gray;
+    font-size: 12px;
+}
+.bbs-content-middle-cell-content {
+    position: relative;
+    top: -5px;
+}
+.bbs-content-bottom {
+    background: white;
+    margin-top: 20px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    box-shadow: 0px 3px 2px #cccccc;
+}
+.bbs-content-bottom-new {
+    font-size: 12px;
+    padding: 10px;
+    border-bottom: solid 1px lightgray;
+}
+.bbs-content-bottom-add {
+    padding: 10px;
+    border-bottom: solid 1px lightgray;
+}
+.bbs-content-bottom-add textarea {
+    width: 740px;
+    height: 120px;
+    border-radius: 5px;
+}
+.bbs-content-bottom-add button {
+    font-weight: bold;
+    margin-top: 5px;
+}
+.bbs-content-bottom-add span {
+    margin-top: 5px;
+    float: right;
+    font-size: 14px;
+    color: #999;
+}
+.bbs-content-bottom-index {
+    padding: 10px;
+}
+.bbs-content-bottom-index a{
+    text-decoration: none;
+    font-size: 14px;
+    color: #778087;
+    margin-left: 700px;
+}
+.bbs-content-bottom-index a:hover{
+    color: #4d5256;
+    text-decoration: underline;
+}
+
+

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>node</title>
+    <link rel="stylesheet" href="/static/css/node.css">
+</head>
+<body>
+    <div class="bbs-top">
+        <div class="bbs-logo">
+            <a href="{{ url_for('home.home') }}">
+                <img src="/static/img/adv.jpg">
+            </a>
+        </div>
+        {% if u %}
+        <div class="bbs-menu">
+            <a href="{{ url_for('home.home') }}">首页</a>
+            <a href="{{ url_for('user.profile', id=u.id) }}">{{ u.username }}</a>
+            <a href="#">时间轴</a>
+            <a href="{{ url_for('user.setting') }}">设置</a>
+            <a href="#">退出登录</a>
+        </div>
+        {% else %}
+        <div class="bbs-menu">
+            <a href="{{ url_for('home.home') }}">首页</a>
+            <a href="{{ url_for('user.login') }}">登录</a>
+            <a href="{{ url_for('user.register') }}">注册</a>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="bbs-main">
+        <div class="bbs-content">
+            <div class="bbs-content-nodes">
+                <a href=" {{ url_for('home.home') }}">All</a>
+                {% for node in node_list %}
+                <a href="{{ url_for('node.show', id=node.id) }}">{{ node.name }}</a>
+                {% endfor %}
+            </div>
+            <div class="bbs-content-add-topic">
+                <a href="{{ url_for('topic.new', id=node.id) }}">发布新帖子</a>
+            </div>
+
+            {% for topic in node.topics %}
+            <div class="bbs-content-topic">
+                <div class="bbs-content-topic-left">
+                    <a href="{{ url_for('user.profile', id=topic.user_id) }}"><img src="{{ topic.user.avatar }}"></a>
+                </div>
+                <div class="bbs-content-topic-middle">
+                    <div class="bbs-content-topic-middle-top">
+                        <a href="{{ url_for('topic.show', id=topic.id) }}">{{ topic.title }}</a>
+                    </div>
+                    <div class="bbs-content-topic-middle-bottom">
+                        <a class="node" href="{{ url_for('node.show', id=topic.node_id) }}">{{ topic.node.name }}</a>
+                        <span>•</span>
+                        <a class="user" href="{{ url_for('user.profile', id=topic.user_id) }}">{{ topic.user.username }}</a>
+                        {% if topic.last_comment_user %}
+                        <span>•</span>
+                        <comment>最后回复来自</comment>
+                        <span>•</span>
+                        <a class="user" href="{{ url_for('user.profile', id=topic.last_comment_user.id) }}">{{ topic.last_comment_user.username }}</a>
+                        {% else %}
+                        {% endif %}
+                    </div>
+                </div>
+                {% if topic.comments_num %}
+                <div class="bbs-content-topic-right">
+                    <a href="{{ url_for('topic.show', id=topic.id) }}">{{ topic.comments_num }}</a>
+                </div>
+                {% else %}
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="bbs-sidebar">
+            <div class="bbs-sidebar-user">
+                {% if u %}
+                <div class="bbs-sidebar-user-username">
+                    <img src="{{ u.avatar }}">
+                    <a href="{{ url_for('user.profile', id=u.id) }}">{{ u.username }}</a>
+                </div>
+                <div class="bbs-sidebar-user-topics">
+                        <a href="#"><span>0</span><br>节点收藏</a>
+                        <a class="bbs-sidebar-user-topics-middle" href="#"><span>0</span><br>主题收藏</a>
+                        <a href="#"><span>0</span><br>特别关注</a>
+                </div>
+                <div class="bbs-sidebar-user-new">
+                    <a href="#">创作新的主题</a>
+                </div>
+                <div class="bbs-sidebar-user-message">
+                    <a href="#">0条未读消息</a>
+                </div>
+                <div class="bbs-sidebar-user-gold">
+                    <a href="#">›  在你开始发帖之前，请先领取初始资本</a>
+                </div>
+                {% else %}
+                <div class="bbs-sidebar-text">
+                    <span class="text-span-a">
+                        V2EX = way to explore
+                    </span>
+                    <br>
+                    <span class="text-span-b">
+                        V2EX 是一个关于分享和探索的地方
+                    </span>
+                </div>
+                <div class="bbs-sidebar-register">
+                    <form action="{{ url_for('user.register') }}">
+                        <button>现在注册</button>
+                    </form>
+                </div>
+                <div class="bbs-sidebar-login">
+                    <span>已注册用户请</span>
+                    <a href="{{ url_for('user.login') }}">登录</a>
+                </div>
+                {% endif %}
+            </div>
+            <div class="bbs-sidebar-ad">
+                <div class="bbs-sidebar-ad-img">
+                    <a href="#"><img src="/static/img/adv.jpg"></a>
+                </div>
+                <div class="bbs-sidebar-ad-text">
+                    <a href="#">广告</a>
+                </div>
+            </div>
+            <div class="bbs-sidebar-topic">
+                <div class="bbs-sidebar-topic-text">
+                    <span>今日热议主题</span>
+                </div>
+                {% for topic in node.topics %}
+                <div class="bbs-sidebar-topic-cell">
+                    <a class="topic-avatar" href="{{ url_for('user.profile', id=topic.user_id) }}"><img src="{{ topic.user.avatar }}"></a>
+                    <a class="topic-title" href="{{ url_for('topic.show', id=topic.id) }}">{{ topic.title }}</a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="bbs-footer">
+        <div class="bbs-footer-top">
+            <a href="#">FAQ</a>
+            <a href="#">API</a>
+            <a href="#">我们的愿景</a>
+            <a href="#">IP查询</a>
+            <a href="#">广告投放</a>
+            <a href="#">鸣谢</a>
+            <a href="#">上网首页</a>
+            <a href="#">1818人在线</a>
+        </div>
+        <div class="bbs-footer-middle">
+            <div>
+                创意工作者的社区
+            </div>
+            <div>
+                World is powered by solitude
+            </div>
+        </div>
+        <div class="bbs-footer-bottom">
+            <img src="/static/img/dongtu.gif">
+        </div>
+    </div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}user profile{% endblock %}
+
+{% block css %}
+    {{ super() }}
+    <link rel="stylesheet" href="/static/css/profile.css">
+{% endblock %}
+
+{% block content %}
+    <div class="bbs-content">
+        <div class="user-profile">
+            <div class="user-profile-avatar">
+                <img src="{{ u1.avatar }}">
+            </div>
+            <div class="user-profile-username">
+                <username>{{ u1.username }}</username>
+                <br>
+                <span>
+                    V2EX 第 {{ u1.id }} 号会员，加入于 {{ u1.created_time }}
+                </span>
+            </div>
+
+        </div>
+
+        <div class="user-topics">
+            <div class="user-topics-top">
+                用户主题
+            </div>
+            {% for topic in topic_list %}
+            <div class="bbs-content-topic">
+                <div class="bbs-content-topic-middle">
+                    <div class="bbs-content-topic-middle-top">
+                        <a href="{{ url_for('topic.show', id=topic.id) }}">{{ topic.title }}</a>
+                    </div>
+                    <div class="bbs-content-topic-middle-bottom">
+                        <a class="node" href="{{ url_for('node.show', id=topic.node_id) }}">{{ topic.node.name }}</a>
+                        <span>•</span>
+                        <a class="user" href="{{ url_for('user.profile', id=topic.user_id) }}">{{ topic.user.username }}</a>
+                        {% if topic.last_comment_user %}
+                        <span>•</span>
+                        <comment>最后回复来自</comment>
+                        <span>•</span>
+                        <a class="user" href="{{ url_for('user.profile', id=topic.last_comment_user.id) }}">{{ topic.last_comment_user.username }}</a>
+                        {% else %}
+                        {% endif %}
+                    </div>
+                </div>
+                {% if topic.comments_num %}
+                <div class="bbs-content-topic-right">
+                    <a href="{{ url_for('topic.show', id=topic.id) }}">{{ topic.comments_num }}</a>
+                </div>
+                {% else %}
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="user-comments">
+            用户回复
+        </div>
+    </div>
+{% endblock %}

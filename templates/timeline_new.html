@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>timeline new</title>
+</head>
+<body>
+    <div>
+        <form action="{{ url_for('timeline.add') }}" method="post">
+            <input name="content" placeholder="timeline content">
+            <button>Add</button>
+        </form>
+    </div>
+</body>
+</html>

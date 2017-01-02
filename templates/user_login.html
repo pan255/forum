@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    user login
+{% endblock %}
+
+{% block css %}
+    {{ super() }}
+    <link rel="stylesheet" href="/static/css/login.css">
+{% endblock %}
+
+{% block content %}
+    <div class="bbs-content">
+        <div class="user-nodes">
+            <a href="{{ url_for('home.home') }}">V2EX</a>
+                ›
+            <span>登录</span>
+        </div>
+        <div class="user-login">
+            <form action="{{ url_for('user.signin') }}" method="post">
+                <span>用户名</span>
+                <input type="text" name="username">
+                <br>
+                <span>密码</span>
+                <input type="password" name="password">
+                <br>
+                <button>登录</button>
+            </form>
+        </div>
+
+    </div>
+{% endblock %}
+

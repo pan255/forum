@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block css %}
+    {{ super() }}
+    <link rel="stylesheet" href="/static/css/setting.css">
+{% endblock %}
+
+
+{% block content %}
+    <div class="bbs-content">
+        <div class="user-info-base">
+            <div class="user-nodes">
+                <a href="{{ url_for('home.home') }}">V2EX</a>
+                ›
+                <span>设置</span>
+            </div>
+            <div class="user-update">
+                <form action="{{ url_for('user.update') }}" method="post">
+                    <span>用户名</span>
+                    <a>{{ u.username }}</a>
+                    <br>
+                    <span>电子邮件</span>
+                    <input type="text" name="e-mail">
+                    <br>
+                    <span>个人网站</span>
+                    <input type="text" name="website">
+                    <br>
+                    <span>所在公司</span>
+                    <input type="text" name="company">
+                    <input type="hidden" name="username" value="{{ u.username }}">
+                    <br>
+                    <button>保存设置</button>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="user-info-avatar">
+            <div class="user-info-text">
+                头像上传
+            </div>
+            <div class="user-info-avatar-avatar">
+                <span>当前头像</span>
+                <img class="img1" src="{{ u.avatar }}">
+                <img class="img2" src="{{ u.avatar }}">
+                <img class="img3" src="{{ u.avatar }}">
+                <br>
+                <a href="#"><button>上传新头像</button></a>
+            </div>
+            <div class="user-info-avatar-regulation">
+                <span>关于图像的规则</span>
+                <li>V2EX 禁止使用任何低俗或者敏感图片作为头像</li>
+                <li>如果你是男的，请不要用女人的照片作为头像，这样可能会对其他会员产生误导</li>
+            </div>
+        </div>
+
+        <div class="user-info-password">
+            <form action="{{ url_for('user.update') }}" method="post">
+                <span>当前密码</span>
+                <input type="text" name="password">
+                <br>
+                <span>新密码</span>
+                <input type="text" name="password">
+                <br>
+                <span>再次输入新密码</span>
+                <input type="text" name="password">
+                <br>
+                <button>更改密码</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

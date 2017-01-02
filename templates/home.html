@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}首页{% endblock %}
+
+{% block css %}
+    {{ super() }}
+    <link rel="stylesheet" href="/static/css/home.css">
+{% endblock %}
+
+{% block content %}
+    <div class="bbs-content">
+        <div class="bbs-content-nodes">
+            <a href=" {{ url_for('home.home') }}">All</a>
+            {% for node in node_list %}
+            <a href="{{ url_for('node.show', id=node.id) }}">{{ node.name }}</a>
+            {% endfor %}
+        </div>
+        <div class="bbs-content-add-topic">
+            <a href="#"></a>
+        </div>
+        {% for topic in topic_list %}
+        <div class="bbs-content-topic">
+            <div class="bbs-content-topic-left">
+                <a href="{{ url_for('user.profile', id=topic.user_id) }}"><img src="{{ topic.user.avatar }}"></a>
+            </div>
+            <div class="bbs-content-topic-middle">
+                <div class="bbs-content-topic-middle-top">
+                    <a href="{{ url_for('topic.show', id=topic.id) }}">{{ topic.title }}</a>
+                </div>
+                <div class="bbs-content-topic-middle-bottom">
+                    <a class="node" href="{{ url_for('node.show', id=topic.node_id) }}">{{ topic.node.name }}</a>
+                    <span>•</span>
+                    <a class="user" href="{{ url_for('user.profile', id=topic.user_id) }}">{{ topic.user.username }}</a>
+                    {% if topic.last_comment_user %}
+                    <span>•</span>
+                    <comment>最后回复来自</comment>
+                    <span>•</span>
+                    <a class="user" href="{{ url_for('user.profile', id=topic.last_comment_user.id) }}">{{ topic.last_comment_user.username }}</a>
+                    {% else %}
+                    {% endif %}
+                </div>
+            </div>
+            {% if topic.comments_num %}
+            <div class="bbs-content-topic-right">
+                <a href="{{ url_for('topic.show', id=topic.id) }}">{{ topic.comments_num }}</a>
+            </div>
+            {% else %}
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+
+{% block topic %}
+    <div class="bbs-sidebar-topic">
+        <div class="bbs-sidebar-topic-text">
+            <span>今日热议主题</span>
+        </div>
+        {% for topic in topic_list %}
+        <div class="bbs-sidebar-topic-cell">
+            <a class="topic-avatar" href="{{ url_for('user.profile', id=topic.user_id) }}"><img src="{{ topic.user.avatar }}"></a>
+            <a class="topic-title" href="{{ url_for('topic.show', id=topic.id) }}">{{ topic.title }}</a>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
