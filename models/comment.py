@@ -1,7 +1,7 @@
 from . import ModelMixin
 from . import db
 from . import timestamp
-
+from models.user import User
 
 class Comment(db.Model, ModelMixin):
     __tablename__ = 'comments'
@@ -12,8 +12,27 @@ class Comment(db.Model, ModelMixin):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     def __init__(self, form):
-        self.title = form.get('title', '')
         self.content = form.get('content', '')
         self.topic_id = form.get('topic_id', '')
         self.user_id = form.get('user_id', '')
         self.created_time = timestamp()
+
+    def get_avatar(self):
+        u = User.query.get(self.user_id)
+        return u.avatar
+
+    def get_username(self):
+        u = User.query.get(self.user_id)
+        return u.username
+
+    def json(self):
+        d = dict(
+            id=self.id,
+            content=self.content,
+            created_time=self.created_time,
+            topic_id=self.topic_id,
+            user_id=self.user_id,
+            avatar=self.get_avatar(),
+            username=self.get_username(),
+        )
+        return d

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}头像设置{% endblock %}
+
+{% block css %}
+    {{ super() }}
+    <link rel="stylesheet" href="/static/css/avatar.css">
+{% endblock %}
+
+{% block content %}
+
+
+
+    <div class="bbs-content">
+        <div class="user-nodes">
+            <a href="{{ url_for('home.home') }}">V2EX</a>
+            ›
+            <a href="{{ url_for('user.setting') }}">设置</a>
+            ›
+            <span>头像上传</span>
+        </div>
+        <div class="user-info-avatar-avatar">
+            <span>当前头像</span>
+            <img class="img1" src="{{ u.avatar }}">
+            <img class="img2" src="{{ u.avatar }}">
+            <img class="img3" src="{{ u.avatar }}">
+            <form action="{{ url_for('user.upload_file') }}" method="post" enctype=multipart/form-data>
+                <!-- 这个 name 是服务器接受到的文件字典的 key -->
+                <!-- 具体请看服务器代码 -->
+                <label>
+                    <t>选择一个图片文件</t>
+                    <input type="file" name="uploaded">
+                </label>
+                <br>
+            <button type="submit">开始上传</button>
+        </form>
+        </div>
+
+    </div>
+{% endblock %}
+

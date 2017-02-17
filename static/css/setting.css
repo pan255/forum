@@ -79,15 +79,13 @@
     bottom: 50px;
     font-size: 14px;
 }
-.user-info-avatar-avatar a{
-    display: block;
-    margin-top: 10px;
-    position: relative;
-    left: 60px;
-}
 .user-info-avatar-avatar button {
     font-size: 12px;
     font-weight: bold;
+    display: block;
+    margin-top: 10px;
+    position: relative;
+    left: 530px;
 }
 .user-info-avatar-regulation {
     padding: 20px 10px;

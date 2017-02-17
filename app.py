@@ -24,6 +24,7 @@ def register_routes(app):
     from routes.user import main as routes_user
     from routes.comment import main as routes_comment
     from routes.timeline import main as routes_timeline
+    from routes.api import main as routes_api
 
     app.register_blueprint(routes_home)
     app.register_blueprint(routes_user, url_prefix='/user')
@@ -31,6 +32,7 @@ def register_routes(app):
     app.register_blueprint(routes_topic, url_prefix='/topic')
     app.register_blueprint(routes_comment, url_prefix='/comment')
     app.register_blueprint(routes_timeline, url_prefix='/timeline')
+    app.register_blueprint(routes_api, url_prefix='/api')
 
 def configure_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True

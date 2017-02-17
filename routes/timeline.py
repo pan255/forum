@@ -55,7 +55,6 @@ def update(id):
 
 
 @main.route('/delete/<int:id>')
-# @admin_required
 def delete(id):
     m = Model.query.get(id)
     m.delete()

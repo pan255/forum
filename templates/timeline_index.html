@@ -5,6 +5,8 @@
 {% block css %}
     {{ super() }}
     <link rel="stylesheet" href="/static/css/timeline.css">
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+    <script src="/static/js/timeline.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -13,14 +15,13 @@
             <span>
                 你在想什么？
             </span>
-            <form action="{{ url_for('timeline.add') }}" method="post">
-                <input type="hidden" name="user_id" value="{{ u.id }}">
-                <textarea name="content"  style="resize:none"></textarea>
+            <!--<form action="{{ url_for('timeline.add') }}" method="post">-->
+                <input class="user-id" type="hidden" name="user_id" value="{{ u.id }}">
+                <textarea class="timeline-content" contextmenu="" name="content"  style="resize:none"></textarea>
                 <div class="timeline-add-public">
-                    <button>发布</button>
+                    <button class="timeline-add-button">发布</button>
                 </div>
-
-            </form>
+            <!--</form>-->
         </div>
 
         <div class="timelines">
@@ -33,11 +34,11 @@
                     <a href="{{ url_for('user.profile', id=u.id) }}">{{ u.username }}</a>
                     <time>{{ timeline.created_time }}</time>
                     <br>
-                    <span>{{ timeline.content }}</span>
+                    <span class="span-timeline">{{ timeline.content }}</span>
                 </div>
                 <div class="timeline-operation">
-                    <a href="{{ url_for('timeline.delete', id=timeline.id) }}">删除</a>
-                    <a href="{{ url_for('timeline.edit', id=timeline.id) }}">编辑</a>
+                    <a class="timeline-delete" data-id="{{ timeline.id }}">删除</a>
+                    <a class="timeline-edit" data-id="{{ timeline.id }}">编辑</a>
                 </div>
             </div>
             {% endfor %}

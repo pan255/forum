@@ -81,4 +81,5 @@
 }
 .timeline-operation a:hover{
     text-decoration: underline;
+    cursor: default;
 }

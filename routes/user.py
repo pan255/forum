@@ -41,7 +41,7 @@ def signin():
     if m.valid_login(user):
         session['user_id'] = user.id
         return redirect(url_for('home.home'))
-    return abort(404)
+    return redirect(url_for('user.login'))
 
 
 @main.route('/profile/<int:id>')
@@ -70,8 +70,45 @@ def update():
         user.update(u)
     return redirect(url_for('home.home'))
 
+
 @main.route('/signout')
 def signout():
     session.pop('user_id')
     return redirect(url_for('home.home'))
 
+
+@main.route('/setting/avatar')
+def setting_avatar():
+    u = current_user()
+    return render_template('user_setting_avatar.html', u=u)
+
+
+@main.route('/upload', methods=['POST'])
+def upload_file():
+    u = current_user()
+    uploads_dir = 'static/img/'
+    f = request.files.get('uploaded')
+    if f:
+        filename = f.filename
+        import uuid
+        filename = str(uuid.uuid4()) + '.' + filename.split('.')[-1]
+        path = uploads_dir + filename
+        f.save(path)
+        u.upload_avatar(path)
+    return redirect(url_for('user.setting_avatar'))
+
+
+@main.route('/setting/password', methods=['POST'])
+def setting_password():
+    u = current_user()
+    form = request.form
+    u.change_password(form)
+    return redirect(url_for('user.setting'))
+
+
+@main.route('/setting/base_info', methods=['POST'])
+def setting_base_info():
+    u = current_user()
+    form = request.form
+    u.change_base_info(form)
+    return redirect(url_for('user.setting'))

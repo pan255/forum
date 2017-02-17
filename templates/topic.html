@@ -7,6 +7,9 @@
 {% block css %}
     {{ super() }}
     <link rel="stylesheet" href="/static/css/topic.css">
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/comment.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -24,7 +27,7 @@
                     <h2>{{ topic.title }}</h2>
                 </div>
                 <div class="bbs-content-top-author">
-                    <a href="#">{{ topic.user.username }}</a>
+                    <a href="{{ url_for('user.profile', id=topic.user_id) }}">{{ topic.user.username }}</a>
                     <span> • 发布于{{ topic.created_time }}</span>
                 </div>
             </div>
@@ -49,23 +52,25 @@
                 0 回复
             </div>
             {% endif %}
-
-            {% for comment in topic.comments %}
-            <div class="bbs-content-middle-cell">
-                <div class="bbs-content-middle-cell-avatar">
-                    <a><img src="{{ comment.user.avatar }}"</a>
-                </div>
-                <div class="bbs-content-middle-cell-comments">
-                    <div class="bbs-content-middle-cell-username">
-                        <a href="#">{{ comment.user.username }}</a>
-                        <span>{{ comment.created_time }}</span>
+            <div class="comment-container">
+                {% for comment in topic.comments %}
+                <div class="bbs-content-middle-cell">
+                    <div class="bbs-content-middle-cell-avatar">
+                        <a><img src="{{ comment.user.avatar }}"</a>
                     </div>
-                    <div class="bbs-content-middle-cell-content">
-                        {{ comment.content }}
+                    <div class="bbs-content-middle-cell-comments">
+                        <div class="bbs-content-middle-cell-username">
+                            <a href="{{ url_for('user.profile', id=comment.user_id) }}">{{ comment.user.username }}</a>
+                            <span>{{ comment.created_time }}</span>
+                        </div>
+                        <div class="bbs-content-middle-cell-content">
+                            {{ comment.content }}
+                        </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
+
         </div>
 
         <div class="bbs-content-bottom">
@@ -73,13 +78,13 @@
                 <span>添加一条新的回复</span>
             </div>
             <div class="bbs-content-bottom-add">
-                <form action="{{ url_for('comment.add') }}" method="post">
-                    <input type="hidden" name="user_id" value="{{ u.id }}">
-                    <input type="hidden" name="topic_id" value="{{ topic.id }}">
-                    <textarea name="content"  style="resize:none"></textarea>
-                    <button>回复</button>
+                <!--<form action="{{ url_for('comment.add') }}" method="post">-->
+                    <input class="user-id" type="hidden" name="user_id" value="{{ u.id }}">
+                    <input class="topic-id" type="hidden" name="topic_id" value="{{ topic.id }}">
+                    <textarea class="comment-content" name="content"  style="resize:none"></textarea>
+                    <button class="comment-add">回复</button>
                     <span>请尽量让自己的回复能够对别人有帮助回复</span>
-                </form>
+                <!--</form>-->
             </div>
             <div class="bbs-content-bottom-index">
                 <a href="{{ url_for('home.home') }}">←V2EX</a>

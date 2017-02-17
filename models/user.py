@@ -9,6 +9,9 @@ class User(db.Model, ModelMixin):
     password = db.Column(db.Text)
     comments = db.relationship('Comment', backref="user")
     avatar = db.Column(db.Text)
+    email = db.Column(db.Text)
+    company = db.Column(db.Text)
+    website = db.Column(db.Text)
     created_time = db.Column(db.Text, default=0)
     topics = db.relationship('Topic', backref="user")
     timelines = db.relationship('Timeline', backref="user")
@@ -18,6 +21,9 @@ class User(db.Model, ModelMixin):
         self.password = form.get('password', '')
         self.avatar = form.get('avatar', '/static/img/longmao.jpeg')
         self.created_time = timestamp()
+        self.email = form.get('email', '')
+        self.company = form.get('company', '')
+        self.website = form.get('website', '')
 
     def valid_login(self, u):
         if u is not None:
@@ -36,3 +42,18 @@ class User(db.Model, ModelMixin):
         self.avatar = u.avatar
         self.save()
 
+    def upload_avatar(self, path):
+        self.avatar = '/' + path
+        self.save()
+
+    def change_password(self, form):
+        if self.password == form['old_password']:
+            if form['new_password'] == form['commit_password']:
+                self.password = form['new_password']
+                self.save()
+
+    def change_base_info(self, form):
+        self.email = form.get('email', '')
+        self.company = form.get('company', '')
+        self.website = form.get('website', '')
+        self.save()

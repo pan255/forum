@@ -15,18 +15,18 @@
                 <span>设置</span>
             </div>
             <div class="user-update">
-                <form action="{{ url_for('user.update') }}" method="post">
+                <form action="{{ url_for('user.setting_base_info') }}" method="post">
                     <span>用户名</span>
                     <a>{{ u.username }}</a>
                     <br>
                     <span>电子邮件</span>
-                    <input type="text" name="e-mail">
+                    <input type="text" name="email" value="{{ u.email }}">
                     <br>
                     <span>个人网站</span>
-                    <input type="text" name="website">
+                    <input type="text" name="website" value="{{ u.website }}">
                     <br>
                     <span>所在公司</span>
-                    <input type="text" name="company">
+                    <input type="text" name="company" value="{{ u.company }}">
                     <input type="hidden" name="username" value="{{ u.username }}">
                     <br>
                     <button>保存设置</button>
@@ -40,12 +40,15 @@
                 头像上传
             </div>
             <div class="user-info-avatar-avatar">
-                <span>当前头像</span>
-                <img class="img1" src="{{ u.avatar }}">
-                <img class="img2" src="{{ u.avatar }}">
-                <img class="img3" src="{{ u.avatar }}">
-                <br>
-                <a href="#"><button>上传新头像</button></a>
+                <form action="{{ url_for('user.setting_avatar') }}" method="get">
+                    <span>当前头像</span>
+                    <img class="img1" src="{{ u.avatar }}">
+                    <img class="img2" src="{{ u.avatar }}">
+                    <img class="img3" src="{{ u.avatar }}">
+                    <br>
+                    <button>上传新头像</button>
+                </form>
+
             </div>
             <div class="user-info-avatar-regulation">
                 <span>关于图像的规则</span>
@@ -55,15 +58,15 @@
         </div>
 
         <div class="user-info-password">
-            <form action="{{ url_for('user.update') }}" method="post">
+            <form action="{{ url_for('user.setting_password') }}" method="post">
                 <span>当前密码</span>
-                <input type="text" name="password">
+                <input type="password" name="old_password">
                 <br>
                 <span>新密码</span>
-                <input type="text" name="password">
+                <input type="password" name="new_password">
                 <br>
                 <span>再次输入新密码</span>
-                <input type="text" name="password">
+                <input type="password" name="commit_password">
                 <br>
                 <button>更改密码</button>
             </form>
